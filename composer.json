@@ -1,0 +1,36 @@
+{
+    "name": "wsw/osseus",
+    "description": "Osseus is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs",
+    "type": "project",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.0",
+        "psr/http-message": "^1.0",
+        "container-interop/container-interop": "^1.2",
+        "psr/container": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.2",
+        "squizlabs/php_codesniffer": "^3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Osseus\\": "src",
+            "App\\": "app"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ronaldo Matos Rodrigues",
+            "email": "ronaldo@whera.com.br"
+        }
+    ],
+    "config": {
+        "process-timeout": 0
+    },
+    "scripts": {
+        "server": "php -S localhost:1234 -t public/",
+        "phpcs": "php vendor/bin/phpcs"
+    }
+}
