@@ -12,4 +12,3 @@ array_walk($files, function (string $file) {
         require_once $file;
     }
 });
-
