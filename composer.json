@@ -38,6 +38,8 @@
     },
     "scripts": {
         "server": "php -S localhost:1234 -t public/",
-        "phpcs": "php vendor/bin/phpcs"
+        "phpcs:check": "php vendor/bin/phpcs",
+        "phpcs:fix": "php vendor/bin/phpcbf",
+        "phpunit:html": "php vendor/bin/phpunit --coverage-html build/html"
     }
 }
