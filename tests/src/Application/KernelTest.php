@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Osseus;
+namespace Osseus\Application;
 
 use Osseus\Container\League\Container;
 use Osseus\Contracts\Container\Container as ContainerContract;
@@ -11,14 +11,14 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 
 /**
- * Class ApplicationTest
+ * Class KernelTest
  *
- * @package Osseus
+ * @package Osseus\Application
  */
-class ApplicationTest extends TestCase
+class KernelTest extends TestCase
 {
     /**
-     * @var Application
+     * @var Kernel
      */
     private $app;
 
@@ -28,8 +28,7 @@ class ApplicationTest extends TestCase
      */
     protected function setUp()
     {
-        $container = new Container();
-        $this->app = new Application($container);
+        $this->app = new Kernel(new Container);
 
         return parent::setUp();
     }
@@ -37,10 +36,12 @@ class ApplicationTest extends TestCase
 
     /**
      * Test instance app
+     *
+     * @return void
      */
     public function testInstanceApp(): void
     {
-        $this->assertInstanceOf(Application::class, $this->app);
+        $this->assertInstanceOf(Kernel::class, $this->app);
         $this->assertAttributeInstanceOf(ContainerContract::class, 'container', $this->app);
     }
 
@@ -56,6 +57,8 @@ class ApplicationTest extends TestCase
 
     /**
      * Test new Service injection DI
+     *
+     * @return void
      */
     public function testAddNewService(): void
     {
@@ -70,6 +73,8 @@ class ApplicationTest extends TestCase
 
     /**
      * Test new Service Lazy.
+     *
+     * @return void
      */
     public function testAddNewServiceCallable(): void
     {
@@ -89,22 +94,25 @@ class ApplicationTest extends TestCase
      * Throw exception test in service not found
      *
      * @expectedException \Psr\Container\NotFoundExceptionInterface
+     *
+     * @return void
      */
-    public function testServiceNotExists()
+    public function testServiceNotExists(): void
     {
         $this->app->getService('wsw');
     }
 
-    public function testRegisterServicePRovider()
+
+    /**
+     * Test resource add service provider.
+     *
+     * @return void
+     */
+    public function testRegisterServicePRovider(): void
     {
         $provider = new class implements ServiceProviderContract
         {
 
-            /**
-             * Register new Service in container.
-             *
-             * @param ContainerContract $container
-             */
             public function register(ContainerContract $container): void
             {
                 $container->add('test.nameFw', 'Osseus');
@@ -119,5 +127,20 @@ class ApplicationTest extends TestCase
 
         $this->assertEquals('Osseus', $this->app->getService('test.nameFw'));
         $this->assertEquals('PHP', $this->app->getService('test.languageFw'));
+    }
+
+
+    /**
+     * Test load files.
+     *
+     * @return void
+     */
+    public function testMethodPrepare(): void
+    {
+        $this->app->prepare();
+
+        $this->assertTrue(defined('ROOT_DIR'));
+
+        $this->assertArrayHasKey('APP_NAME', $_ENV);
     }
 }

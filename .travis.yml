@@ -13,6 +13,7 @@ matrix:
 
 before_script:
   - travis_retry composer self-update
+  - travis_retry composer app:dotenv-copy
   - travis_retry composer install
 
 script:

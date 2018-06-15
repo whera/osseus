@@ -6,10 +6,12 @@
     "license": "MIT",
     "require": {
         "php": ">=7.2",
-        "psr/http-message": "^1.0",
         "container-interop/container-interop": "^1.2",
+        "illuminate/support": "^5.6",
+        "league/container": "^2.4",
         "psr/container": "^1.0",
-        "league/container": "^2.4"
+        "psr/http-message": "^1.0",
+        "vlucas/phpdotenv": "^2.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.2",
@@ -34,10 +36,16 @@
         }
     ],
     "config": {
-        "process-timeout": 0
+        "process-timeout": 0,
+        "sort-packages": true,
+        "optimize-autoloader": true
     },
     "scripts": {
+        "post-root-package-install": [
+            "@app:dotenv-copy"
+        ],
         "app:server": "php -S localhost:1234 -t public/",
+        "app:dotenv-copy": "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
         "phpcs:check": "php vendor/bin/phpcs",
         "phpcs:fix": "php vendor/bin/phpcbf",
         "test:coverage-html": "php vendor/bin/phpunit --coverage-html build/html",

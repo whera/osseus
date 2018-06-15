@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
+use Osseus\Application\Kernel;
+use Osseus\Container\League\Container;
+
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-$path = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Autoload' . DIRECTORY_SEPARATOR;
-$files = glob($path . '*.php');
+$app = new Kernel(new Container);
+$app->prepare();
 
-array_walk($files, function (string $file) {
-    if (file_exists($file)) {
-        require_once $file;
-    }
-});
+return $app;

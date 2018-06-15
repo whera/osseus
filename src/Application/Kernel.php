@@ -2,22 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Osseus;
+namespace Osseus\Application;
 
+use Osseus\Application\Support\Loader;
 use Osseus\Contracts\Container\Container as ContainerContract;
 use Osseus\Contracts\ServiceProvider\ServiceProvider as ServiceProviderContract;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
 /**
- * Application
+ * Kernel
  *
  * This is the primary class, configure, and run a Osseus Framework application.
  *
- * @package Osseus
+ * @package Osseus\Application
  */
-class Application
+class Kernel
 {
+    use Loader;
+
     /**
      * @var ContainerContract
      */
@@ -25,7 +28,7 @@ class Application
 
 
     /**
-     * Application constructor.
+     * Kernel constructor.
      *
      * @param ContainerContract $container Container app
      */
@@ -95,5 +98,17 @@ class Application
         $provider->register($this->getContainer());
 
         return $this;
+    }
+
+
+    /**
+     * Prepare framework for execution.
+     *
+     * @return void
+     */
+    public function prepare(): void
+    {
+        $this->loadDotEnv();
+        $this->autoload();
     }
 }
