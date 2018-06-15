@@ -1,5 +1,7 @@
 filter:
-    excluded_paths: [tests/*]
+    excluded_paths: ["tests/*", "sami-config.php"]
+    dependency_paths:
+      - vendor/
 
 checks:
     php:
