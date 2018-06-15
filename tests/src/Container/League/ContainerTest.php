@@ -94,4 +94,14 @@ class ContainerTest extends TestCase
 
         $this->assertFalse($this->container->has('classx'));
     }
+
+    /**
+     * Throw exception test in service not found
+     *
+     * @expectedException \Psr\Container\NotFoundExceptionInterface
+     */
+    public function testServiceNotExists()
+    {
+        $this->container->get('wsw');
+    }
 }
