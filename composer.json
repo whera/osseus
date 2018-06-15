@@ -37,9 +37,11 @@
         "process-timeout": 0
     },
     "scripts": {
-        "server": "php -S localhost:1234 -t public/",
+        "app:server": "php -S localhost:1234 -t public/",
         "phpcs:check": "php vendor/bin/phpcs",
         "phpcs:fix": "php vendor/bin/phpcbf",
-        "phpunit:html": "php vendor/bin/phpunit --coverage-html build/html"
+        "test:coverage-html": "php vendor/bin/phpunit --coverage-html build/html",
+        "test:coverage-text": "php vendor/bin/phpunit --coverage-text",
+        "doc:api": "sami update sami-config.php"
     }
 }
