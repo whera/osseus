@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="vendor/autoload.php"
+<phpunit bootstrap="src/bootstrap.php"
          backupGlobals="false"
          backupStaticAttributes="false"
          colors="true"
@@ -11,18 +11,24 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Osseus test suite">
-            <directory suffix="Test.php">tests/src</directory>
+            <directory suffix="Test.php">./tests/src</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
             <directory suffix=".php">src/</directory>
-            <directory suffix=".php">app/</directory>
+            <exclude>
+                <file>src/bootstrap.php</file>
+            </exclude>
         </whitelist>
     </filter>
     <logging>
         <log type="junit" target="build/report.junit.xml"/>
-        <log type="coverage-html" target="build/coverage" charset="UTF-8" yui="true" highlight="true"/>
+        <log type="coverage-html" target="build/coverage" charset="UTF-8"
+             yui="true"
+             highlight="true"
+             lowUpperBound="70"
+             highLowerBound="90"/>
         <log type="coverage-text" target="build/coverage.txt"/>
         <log type="coverage-clover" target="build/logs/clover.xml"/>
     </logging>
