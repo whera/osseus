@@ -25,3 +25,7 @@ if (!defined('CORE_DIR')) {
 if (!defined('TMP_DIR')) {
     define('TMP_DIR', ROOT_DIR . 'tmp' . DS);
 }
+
+if (!defined('CONFIG_DIR')) {
+    define('CONFIG_DIR', ROOT_DIR . 'config' . DS);
+}
