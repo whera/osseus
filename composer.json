@@ -21,6 +21,12 @@
             "App\\": "app"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Osseus\\": "tests/src",
+            "App\\": "tests/app"
+        }
+    },
     "authors": [
         {
             "name": "Ronaldo Matos Rodrigues",
