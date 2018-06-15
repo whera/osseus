@@ -6,6 +6,7 @@ namespace Osseus;
 
 use Osseus\Container\League\Container;
 use Osseus\Contracts\Container\Container as ContainerContract;
+use Osseus\Contracts\ServiceProvider\ServiceProvider as ServiceProviderContract;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -92,5 +93,31 @@ class ApplicationTest extends TestCase
     public function testServiceNotExists()
     {
         $this->app->getService('wsw');
+    }
+
+    public function testRegisterServicePRovider()
+    {
+        $provider = new class implements ServiceProviderContract
+        {
+
+            /**
+             * Register new Service in container.
+             *
+             * @param ContainerContract $container
+             */
+            public function register(ContainerContract $container): void
+            {
+                $container->add('test.nameFw', 'Osseus');
+
+                $container->addLazy('test.languageFw', function () {
+                        return 'PHP';
+                });
+            }
+        };
+
+        $this->app->addServiceProvider($provider);
+
+        $this->assertEquals('Osseus', $this->app->getService('test.nameFw'));
+        $this->assertEquals('PHP', $this->app->getService('test.languageFw'));
     }
 }

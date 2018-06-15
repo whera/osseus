@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Osseus;
 
 use Osseus\Contracts\Container\Container as ContainerContract;
+use Osseus\Contracts\ServiceProvider\ServiceProvider as ServiceProviderContract;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -78,6 +79,20 @@ class Application
         }
 
         $this->container->add($name, $service);
+
+        return $this;
+    }
+
+    /**
+     * We've added a new service provider to our dependency container.
+     *
+     * @param ServiceProviderContract $provider Service provider.
+     *
+     * @return self
+     */
+    public function addServiceProvider(ServiceProviderContract $provider): self
+    {
+        $provider->register($this->getContainer());
 
         return $this;
     }
