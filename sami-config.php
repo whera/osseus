@@ -10,12 +10,14 @@ $iterator = Finder::create()
     ->name('*.php')
     ->in(__DIR__ . DIRECTORY_SEPARATOR . 'src');
 
+$path = __DIR__ . DIRECTORY_SEPARATOR . 'docs' . DIRECTORY_SEPARATOR . 'api' . DIRECTORY_SEPARATOR;
+
 return new Sami(
     $iterator,
     [
         'theme'     => 'default',
         'title'     => 'Osseus API',
-        'build_dir' => __DIR__ . DIRECTORY_SEPARATOR . 'docs' . DIRECTORY_SEPARATOR . 'build',
-        'cache_dir' => __DIR__ . DIRECTORY_SEPARATOR . 'docs' . DIRECTORY_SEPARATOR . 'cache',
+        'build_dir' => $path . 'html',
+        'cache_dir' => $path . 'cache',
     ]
 );
