@@ -8,3 +8,5 @@ Osseus is a PHP micro framework that helps you quickly write simple yet powerful
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8636be0f7bd74e5dbb38acf2543a82ff)](https://www.codacy.com/app/whera/osseus?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=whera/osseus&amp;utm_campaign=Badge_Grade)
 
 Wait... 
+
+:D
