@@ -14,7 +14,7 @@ class test{
         // Eu sou um teste do codacy
     }
 
-    public function ($x = [], $version) {
+    public function xpto($x = [], $version) {
         // PSR-2
     }
 }
