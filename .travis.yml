@@ -17,8 +17,10 @@ before_script:
   - travis_retry composer install
 
 script:
-  - vendor/bin/phpcs
-  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+  - php vendor/bin/phpcs
+  - php vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+  - php vendor/bin/phpunit --coverage-clover build/coverage/xml
 
 after_script:
   - if [ "$ENVIRONMENT" == 'coverage' ]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --access-token="c6e4dbdef19408fe30f9e3986d70ef1e2deb0a44b0860f4d5135e37d989c13df" --format=php-clover coverage.clover; fi
+  - if [ "$ENVIRONMENT" == 'coverage' ]; then php vendor/bin/codacycoverage clover build/coverage/xml; fi
